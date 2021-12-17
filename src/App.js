@@ -2,6 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import img from './img/crypto.png';
 
+//Components
+import Form from './components/Form';
+
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
@@ -22,6 +25,7 @@ const Heading = styled.h1`
   color: #fff;
   text-align: left;
   font-weight: 700;
+  letter-spacing: 2px;
   font-size: 50px;
   margin-bottom: 50px;
   margin-top: 80px;
@@ -43,6 +47,7 @@ function App() {
       </div>
       <div>
         <Heading>Cotize your Crypto </Heading>
+        <Form />
       </div>
     </Container>
   );
