@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+//Hooks
+import { useCoin } from '../hooks/useCoin';
+
 const InnerForm = styled.form``;
 
 const Button = styled.button`
@@ -23,8 +26,13 @@ const Button = styled.button`
 `;
 
 const Form = () => {
+  const coins = ['USD', 'MXN', 'EUR', 'GBP', 'COD'];
+
+  const [coin, setCoin, SelectCoin] = useCoin('Select your coin', coins);
+
   return (
     <InnerForm>
+      <SelectCoin />
       <Button type="submit">Cotize crypto</Button>
     </InnerForm>
   );
