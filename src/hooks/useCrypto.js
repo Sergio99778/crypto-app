@@ -41,5 +41,5 @@ export const useCrypto = (label = 'Options', listCrypto) => {
     </Fragment>
   );
 
-  return [crypto, setCrypto, SelectCrypto];
+  return [crypto, SelectCrypto];
 };

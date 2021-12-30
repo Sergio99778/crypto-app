@@ -41,5 +41,5 @@ export const useCoin = (label = 'Options', coinsNames = ['USD']) => {
     </Fragment>
   );
 
-  return [coin, setCoin, SelectCoin];
+  return [coin, SelectCoin];
 };

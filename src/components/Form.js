@@ -30,7 +30,7 @@ const Button = styled.button`
   }
 `;
 
-const Form = () => {
+const Form = ({setCoin,setCrypto}) => {
 
   const [error,setError] = useState(false)
 
@@ -50,9 +50,9 @@ const Form = () => {
   }, []);
 
   //Creating SelectCoin
-  const [coin, setCoin, SelectCoin] = useCoin('Select your coin', coins);
+  const [coin, SelectCoin] = useCoin('Select your coin', coins);
   //Crea
-  const [crypto, setCrypto, SelectCrypto] = useCrypto('Select your crypto', listCrypto);
+  const [crypto, SelectCrypto] = useCrypto('Select your crypto', listCrypto);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,8 +62,10 @@ const Form = () => {
       return
     }
 
-    //Pass data to App component
     setError(false)
+    //Pass data to App component
+    setCoin(coin)
+    setCrypto(crypto)
   };
 
   return (
