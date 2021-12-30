@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const Label = styled.label`
   font-family: 'Bebas Neue', cursive;
@@ -43,3 +44,8 @@ export const useCrypto = (label = 'Options', listCrypto) => {
 
   return [crypto, SelectCrypto];
 };
+
+useCrypto.propTypes = {
+  label: PropTypes.string,
+  listCrypto: PropTypes.object.isRequired
+}

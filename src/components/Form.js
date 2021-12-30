@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 //Hooks
 import { useCoin } from '../hooks/useCoin';
@@ -77,5 +78,10 @@ const Form = ({setCoin,setCrypto}) => {
     </InnerForm>
   );
 };
+
+Form.propTypes = {
+  setCoin: PropTypes.func.isRequired,
+  setCrypto: PropTypes.func.isRequired
+}
 
 export default Form;

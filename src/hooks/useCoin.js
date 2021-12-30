@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const Label = styled.label`
   font-family: 'Bebas Neue', cursive;
@@ -43,3 +44,8 @@ export const useCoin = (label = 'Options', coinsNames = ['USD']) => {
 
   return [coin, SelectCoin];
 };
+
+useCoin.propTypes = {
+  label : PropTypes.string,
+  coinsNames: PropTypes.array
+}
