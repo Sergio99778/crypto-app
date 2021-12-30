@@ -6,6 +6,9 @@ import axios from 'axios';
 import { useCoin } from '../hooks/useCoin';
 import { useCrypto } from '../hooks/useCrypto';
 
+//Components
+import ErrorMessage from './Error'
+
 const InnerForm = styled.form``;
 
 const Button = styled.button`
@@ -28,6 +31,9 @@ const Button = styled.button`
 `;
 
 const Form = () => {
+
+  const [error,setError] = useState(false)
+
   const coins = ['USD', 'MXN', 'EUR', 'GBP', 'COD'];
 
   const [listCrypto, setListCrypto] = useState([]);
@@ -39,7 +45,6 @@ const Form = () => {
       const result = await axios.get(url);
 
       setListCrypto(result.data.Data);
-      console.log(listCrypto);
     };
     getData();
   }, []);
@@ -49,8 +54,21 @@ const Form = () => {
   //Crea
   const [crypto, setCrypto, SelectCrypto] = useCrypto('Select your crypto', listCrypto);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //validate
+    if(coin === '' || crypto === ''){
+      setError(true)
+      return
+    }
+
+    //Pass data to App component
+    setError(false)
+  };
+
   return (
-    <InnerForm>
+    <InnerForm onSubmit={handleSubmit}>
+      { error ? <ErrorMessage message={'Fill the required fields'} />  :null}
       <SelectCoin />
       <SelectCrypto />
       <Button type="submit">Cotize crypto</Button>
