@@ -45,6 +45,7 @@ function App() {
 
   const [coin,setCoin] = useState('')
   const [crypto,setCrypto] = useState('')
+  const [result, setResult] = useState({})
 
   useEffect(()  =>  {
     if(coin === '') return 
@@ -54,7 +55,7 @@ function App() {
 
       const url =`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${coin}`
       const response = await axios.get(url)
-      console.log(response.data.DISPLAY[crypto][coin])
+      setResult(response.data.DISPLAY[crypto][coin])
     }
     getData()
 
