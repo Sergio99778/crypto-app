@@ -6,6 +6,7 @@ import axios from "axios";
 //Components
 import Form from "./components/Form";
 import Cotization from "./components/Cotization";
+import Spinner from "./components/Spinner";
 
 const Container = styled.div`
   max-width: 900px;
@@ -46,6 +47,7 @@ function App() {
   const [coin, setCoin] = useState("");
   const [crypto, setCrypto] = useState("");
   const [result, setResult] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (coin === "") return;
@@ -54,10 +56,21 @@ function App() {
     const getData = async () => {
       const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${coin}`;
       const response = await axios.get(url);
-      setResult(response.data.DISPLAY[crypto][coin]);
+
+      //show Spinner
+      setLoading(true);
+
+      setTimeout(() => {
+        //Remove Spinner
+        setLoading(false);
+        //Save data
+        setResult(response.data.DISPLAY[crypto][coin]);
+      }, 30);
     };
     getData();
   }, [coin, crypto]);
+
+  const componente = loading ? <Spinner /> : <Cotization result={result} />;
 
   return (
     <Container>
@@ -67,7 +80,7 @@ function App() {
       <div>
         <Heading>Cotize your Crypto </Heading>
         <Form setCoin={setCoin} setCrypto={setCrypto} />
-        <Cotization result={result} />
+        {componente}
       </div>
     </Container>
   );
