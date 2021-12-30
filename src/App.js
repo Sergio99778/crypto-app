@@ -1,10 +1,11 @@
-import React, {useState,useEffect} from 'react';
-import styled from '@emotion/styled';
-import img from './img/crypto.png';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import styled from "@emotion/styled";
+import img from "./img/crypto.png";
+import axios from "axios";
 
 //Components
-import Form from './components/Form';
+import Form from "./components/Form";
+import Cotization from "./components/Cotization";
 
 const Container = styled.div`
   max-width: 900px;
@@ -23,7 +24,7 @@ const Img = styled.img`
 `;
 
 const Heading = styled.h1`
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
   color: #fff;
   text-align: left;
   font-weight: 700;
@@ -33,7 +34,7 @@ const Heading = styled.h1`
   margin-top: 80px;
 
   &::after {
-    content: '';
+    content: "";
     width: 100px;
     height: 6px;
     background-color: #66a2fe;
@@ -42,25 +43,21 @@ const Heading = styled.h1`
 `;
 
 function App() {
+  const [coin, setCoin] = useState("");
+  const [crypto, setCrypto] = useState("");
+  const [result, setResult] = useState({});
 
-  const [coin,setCoin] = useState('')
-  const [crypto,setCrypto] = useState('')
-  const [result, setResult] = useState({})
-
-  useEffect(()  =>  {
-    if(coin === '') return 
+  useEffect(() => {
+    if (coin === "") return;
 
     //Consult api
     const getData = async () => {
-
-      const url =`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${coin}`
-      const response = await axios.get(url)
-      setResult(response.data.DISPLAY[crypto][coin])
-    }
-    getData()
-
-
-  },[coin,crypto])
+      const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${coin}`;
+      const response = await axios.get(url);
+      setResult(response.data.DISPLAY[crypto][coin]);
+    };
+    getData();
+  }, [coin, crypto]);
 
   return (
     <Container>
@@ -70,6 +67,7 @@ function App() {
       <div>
         <Heading>Cotize your Crypto </Heading>
         <Form setCoin={setCoin} setCrypto={setCrypto} />
+        <Cotization result={result} />
       </div>
     </Container>
   );

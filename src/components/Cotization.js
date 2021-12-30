@@ -23,7 +23,9 @@ const Price = styled.p`
 `;
 
 const Cotization = ({ result }) => {
-  if (Object.keys(result) === 0) return;
+  if (Object.keys(result).length === 0) {
+    return null;
+  }
   return (
     <ResultContainer>
       <Price>
