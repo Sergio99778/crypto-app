@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from '@emotion/styled';
 import img from './img/crypto.png';
+import axios from 'axios';
 
 //Components
 import Form from './components/Form';
@@ -44,6 +45,21 @@ function App() {
 
   const [coin,setCoin] = useState('')
   const [crypto,setCrypto] = useState('')
+
+  useEffect(()  =>  {
+    if(coin === '') return 
+
+    //Consult api
+    const getData = async () => {
+
+      const url =`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${coin}`
+      const response = await axios.get(url)
+      console.log(response.data.DISPLAY[crypto][coin])
+    }
+    getData()
+
+
+  },[coin,crypto])
 
   return (
     <Container>
